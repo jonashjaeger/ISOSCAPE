@@ -1,25 +1,33 @@
-# ISOSCAPE — Archaeological Stable Isotope Explorer
+# ISOSCAPE v0.2 — archaeological isotope explorer
 
-Static, browser-based isotope explorer. No backend, build step or external dependencies.
+Static, mobile-friendly isotope research explorer for GitHub Pages. The application includes **synthetic demo data only** (fictional specimens and sites). No unpublished isotope observations are included.
 
-## Privacy and demo data
+## Deploy to GitHub Pages
 
-**All 36 bundled specimens and all six sites are fictional.** Isotope values were independently generated for demonstration purposes. They are not measured observations and must not be cited as archaeological evidence. The public HTML and example CSV contain no samples, sites, references, or measurements from the private research dataset.
+Upload the contents of this directory to the root of a public GitHub repository. Go to **Settings → Pages → Build and deployment**, choose **Deploy from a branch**, select `main` and `/(root)` and save. The site is available at `https://YOUR-USERNAME.github.io/REPOSITORY/` after GitHub builds it.
 
-Use **Import CSV** to open your own dataset. Imported CSV/TSV data are read locally by your browser; this application has no upload endpoint and does not send the data to GitHub or store it on the server. Your imported data exist in the current browser tab only. Reloading the page resets to the synthetic demo. Be careful using export or screenshots with private data.
+## Usage on iPhone
 
-On an iPhone, save your private CSV to **Files**, open the hosted app in Safari, tap **Import CSV** and choose the CSV from Files. Do not add the private CSV to the GitHub repository.
+In Safari, open the published site and use **Import CSV** to choose your real dataset from the iOS Files app. Imported content is processed in the browser only; this static application does not transmit or store it remotely. Refreshing resets to the synthetic demo. GitHub Pages is public: **never commit research data** into the repository.
 
-## GitHub Pages deployment
+The page and scripts require a web server (GitHub Pages is fine). For local development use `python3 -m http.server 8000` and open `http://localhost:8000`.
 
-1. Create a public repository named `isoscape`.
-2. Upload `index.html`, `isoscape_demo.csv`, `.nojekyll`, `README.md` into the repository root.
-3. In **Settings → Pages**, select **Deploy from a branch**, `main`, `/ (root)`.
-4. Open `https://YOUR-USERNAME.github.io/isoscape/`.
+## Project layout
 
-## Limitations
+- `index.html`: page markup
+- `css/styles.css`: visual design and responsive layout
+- `js/demo.js`: bundled fictional demonstration records
+- `js/importer.js`: CSV/TSV parsing and normalization
+- `js/statistics.js`: descriptive statistics
+- `js/plots.js`: SVG plot and interactions
+- `js/analysis.js`: summaries, quality-control indicators, husbandry comparison
+- `js/app.js`: state, filtering, sample table, import and export actions
+- `data/synthetic-demo.csv`: downloadable demonstration dataset
 
-- Missing isotope values are kept missing, not converted to zero.
-- Collagen QC cannot be evaluated without QC laboratory measurements.
-- Livestock group comparisons are descriptive, not causal or diagnostic.
-- The app does not preserve imported datasets after reload.
+## Data format
+
+Columns: `Sample`, `Site`, `Geography`, `Tissue`, `Chronology`, `Species`, `d13C`, `d15N`, `d34S`, `Notes`, `Reference`; optional `CN`, `CollagenYield`, `CS`, `NS`. Missing isotope values are blank, not zero. Quality-control flags do **not** establish validity when required collagen measurements are missing.
+
+## Compatibility
+
+No frameworks, package manager, backend, telemetry, or remote dependencies. JavaScript is divided into ordered, deferred files to keep the original app behaviour while making individual modules maintainable.
