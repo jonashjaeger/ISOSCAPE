@@ -31,3 +31,16 @@ Columns: `Sample`, `Site`, `Geography`, `Tissue`, `Chronology`, `Species`, `d13C
 ## Compatibility
 
 No frameworks, package manager, backend, telemetry, or remote dependencies. JavaScript is divided into ordered, deferred files to keep the original app behaviour while making individual modules maintainable.
+
+
+## Flexible importer (v0.3)
+
+Click **Import dataset** to choose a UTF-8 CSV, TSV, or delimited text file. The wizard detects the delimiter, suggests a header row and matching isotope/metadata fields, and provides manual mapping. Confirm a validation report before replacing the current dataset. Missing isotope values are retained; malformed nonempty numeric values block import. Duplicate sample IDs and generated IDs are flagged as warnings. Both comma and dot decimal separators are recognised where unambiguous.
+
+Import mapping profiles can be saved in this browser and exported/imported as JSON. Profiles save **column names and mappings only**, not measurements. Imported research files are read locally in the browser, and no network upload is made by the application. The current dataset is memory-only and resets on reload.
+
+Excel `.xlsx`/`.xls` binaries are **not yet supported**; export a worksheet as CSV or TSV first. Imported values are preserved unmodified in each record's in-memory `_raw` field; exports contain the standardised fields.
+
+## Privacy
+
+The public repository contains only fictional synthetic specimens. Do not commit real research CSVs. GitHub Pages serves the static files only.
